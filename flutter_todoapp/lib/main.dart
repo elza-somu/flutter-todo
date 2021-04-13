@@ -90,4 +90,25 @@ class TodoListState extends State<TodoList> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
+
+  void _pushAddTodoScreen() {
+    // Push this page onto the stack
+    Navigator.of(context).push(
+        // MaterialPageRoute will automatically animate the screen entry, as well as adding
+        // a back button to close it
+        new MaterialPageRoute(builder: (context) {
+      return new Scaffold(
+          appBar: new AppBar(title: new Text('Add a new item')),
+          body: new TextField(
+            autofocus: true,
+            onSubmitted: (val) {
+              _addTodoItem(val);
+              Navigator.pop(context); // Close the add todo screen
+            },
+            decoration: new InputDecoration(
+                hintText: 'Enter something to do...',
+                contentPadding: const EdgeInsets.all(16.0)),
+          ));
+    }));
+  }
 }
